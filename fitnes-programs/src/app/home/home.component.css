@@ -1,0 +1,16 @@
+h1 {
+    color: #ffffff;
+    margin: auto;
+    text-align: center;
+}
+
+.welcome {
+    padding: 32px;
+    font-size: 125%;
+    height: 220px;
+    color: white;   
+}
+
+.welcome p {
+    margin-top: 32px;
+}
