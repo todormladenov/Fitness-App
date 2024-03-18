@@ -1,0 +1,33 @@
+header ul {
+    margin: 0;
+}
+
+img {
+    width: auto;
+    height: 100px;
+}
+
+header {
+    background-color: #ec123e;
+    padding: 0;
+    margin: auto;
+    list-style-type: none;
+}
+
+header ul li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header ul li a {
+    color: white;
+    margin: 0 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+header ul li a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
