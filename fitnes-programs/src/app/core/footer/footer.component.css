@@ -1,0 +1,11 @@
+.footer {
+    background-color: #fbfdfd;
+    padding: 20px;
+    font-weight: 500;
+}
+
+.footer p {
+    color: #292929;
+    margin: 0;
+    text-align: center;
+}
