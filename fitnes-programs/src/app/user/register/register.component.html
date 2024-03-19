@@ -1,32 +1,61 @@
 <div class="register">
     <h3>Register Form</h3>
-    <form class="form">
+    <form class="form" #form="ngForm" (ngSubmit)="register(form)">
 
         <!-- email -->
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" placeholder="Email" name="email">
+            <input type="text" placeholder="Email" name="email" ngModel #emailInput="ngModel" required email>
         </div>
+
+        <ng-container *ngIf="emailInput.touched">
+            <p class="error" *ngIf="emailInput.errors?.['required']">
+                Email is required!
+            </p>
+            <p class="error" *ngIf="emailInput.errors?.['email']">
+                Invalid email!
+            </p>
+        </ng-container>
 
         <!-- username -->
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" placeholder="Username" name="username">
+            <input type="text" placeholder="Username" name="username" ngModel #usernameInput="ngModel" required
+                minlength="3">
         </div>
+
+        <ng-container *ngIf="usernameInput.touched">
+            <p class="error" *ngIf="usernameInput.errors?.['required']">
+                Username is required!
+            </p>
+            <p class="error" *ngIf="usernameInput.errors?.['minlength']">
+                Username is too short!
+            </p>
+        </ng-container>
 
         <!-- password -->
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" placeholder="Password" name="password">
+            <input type="password" placeholder="Password" name="password" ngModel #passwordInput="ngModel" required
+                minlength="8">
         </div>
+
+        <ng-container *ngIf="passwordInput.touched">
+            <p class="error" *ngIf="passwordInput.errors?.['required']">
+                Password is required!
+            </p>
+            <p class="error" *ngIf="passwordInput.errors?.['minlength']">
+                Password is must be 8 characters long!
+            </p>
+        </ng-container>
 
         <!-- repeat password -->
         <div class="form-group">
             <label for="RePassword">Repeat Password</label>
-            <input type="password" placeholder="Repeat Password" name="RePassword">
+            <input type="password" placeholder="Repeat Password" name="RePassword" ngModel #rePasswordInput="ngModel">
         </div>
         
         <a routerLink="/user/login">Already have account? Login here.</a>
-        <input type="submit" value="Register">
+        <input type="submit" value="Register" [disabled]="form.invalid">
     </form>
 </div>
