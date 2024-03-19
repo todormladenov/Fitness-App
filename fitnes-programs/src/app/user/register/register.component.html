@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div class="register">
+    <h3>Register Form</h3>
+    <form class="form">
+
+        <!-- email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" placeholder="Email" name="email">
+        </div>
+
+        <!-- username -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" name="username">
+        </div>
+
+        <!-- password -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" name="password">
+        </div>
+
+        <!-- repeat password -->
+        <div class="form-group">
+            <label for="RePassword">Repeat Password</label>
+            <input type="password" placeholder="Repeat Password" name="RePassword">
+        </div>
+        
+        <a routerLink="/user/login">Already have account? Login here.</a>
+        <input type="submit" value="Register">
+    </form>
+</div>
