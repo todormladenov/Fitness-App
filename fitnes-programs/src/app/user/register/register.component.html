@@ -52,8 +52,15 @@
         <!-- repeat password -->
         <div class="form-group">
             <label for="RePassword">Repeat Password</label>
-            <input type="password" placeholder="Repeat Password" name="RePassword" ngModel #rePasswordInput="ngModel">
+            <input type="password" placeholder="Repeat Password" name="RePassword" ngModel #rePasswordInput="ngModel"
+            [appPasswordMatch]="passwordInput.value">
         </div>
+
+        <ng-container *ngIf="rePasswordInput.touched">
+            <p class="error" *ngIf="rePasswordInput.errors?.['passwordMatch']">
+                Passwords must match!
+            </p>
+        </ng-container>
         
         <a routerLink="/user/login">Already have account? Login here.</a>
         <input type="submit" value="Register" [disabled]="form.invalid">
