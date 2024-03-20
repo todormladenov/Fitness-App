@@ -57,6 +57,7 @@ This is a system for creating, managing and subscribing for fitness programs.
 ```
 
 ## Accessibility Control
-* Guest users can register, browse quizzes and inspec quiz details.
-* Registered users can create, edit, contest quizzes, inspec their solution results.
-* Only the creator of a test can edit and delete the quiz.
+* Guest users can register, browse programs and inspec program details.
+* Registered users can create programs
+* Registered users that are not owners can subscribe for programs.
+* Only the creator of a program can edit and delete it.
