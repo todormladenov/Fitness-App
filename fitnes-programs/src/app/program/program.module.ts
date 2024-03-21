@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateProgramComponent } from './create-program/create-program.component';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { DetailsComponent } from './details/details.component';
+import { ProgramRoutingModule } from './program-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { DetailsComponent } from './details/details.component';
     DetailsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ProgramRoutingModule
   ]
 })
 export class ProgramModule { }
