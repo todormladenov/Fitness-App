@@ -4,5 +4,5 @@ export interface UserForAuth {
     objectId: string,
     createdAt: string,
     updatedAt: string,
-
+    sessionToken: string
 }

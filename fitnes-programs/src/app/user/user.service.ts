@@ -12,4 +12,8 @@ export class UserService {
   registerUser(email: string, username: string, password: string) {
     return this.http.post<UserForAuth>('api/users', { email, username, password });
   }
+
+  loginUser(username: string, password: string) {
+    return this.http.post<UserForAuth>('api/login', { username, password })
+  }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,16 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent {
 
+  constructor(private userService: UserService, private router: Router) { }
 
-  login(form: NgForm){
-    // TODO: Implement login...
+  login(form: NgForm) {
+    if (form.invalid) {
+      return
+    }
+
+    const { username, password } = form.value
+    this.userService.loginUser(username, password).subscribe((user) => {
+      this.router.navigate(['/home'])
+    });
   }
 }

@@ -2,15 +2,15 @@
     <h3>Login Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="login(form)">
 
-        <!-- email -->
+        <!-- username -->
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" placeholder="Email" name="email" ngModel #emailInput="ngModel" required>
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" name="username" ngModel #usernameInput="ngModel" required>
         </div>
 
-        <ng-container *ngIf="emailInput.touched">
-            <p class="error" *ngIf="emailInput.errors?.['required']">
-                Email is required!
+        <ng-container *ngIf="usernameInput.touched">
+            <p class="error" *ngIf="usernameInput.errors?.['required']">
+                Username is required!
             </p>
         </ng-container>
 
