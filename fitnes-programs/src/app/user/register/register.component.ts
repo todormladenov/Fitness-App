@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,8 +10,19 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent {
 
+  constructor(private userService: UserService, private router: Router) { }
 
   register(form: NgForm) {
-    // TODO: Implement register
+    if (form.invalid) {
+      return;
+    }
+
+    const { email, username, password } = form.value
+
+    this.userService.registerUser(email, username, password)
+      .subscribe((user) => {
+        console.log(user);
+        this.router.navigate(['/home'])
+      });
   }
 }
