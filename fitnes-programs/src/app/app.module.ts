@@ -10,6 +10,7 @@ import { ProgramModule } from './program/program.module';
 import { HttpClientModule } from '@angular/common/http'
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     CoreModule,
     UserModule,
     ProgramModule,

@@ -7,10 +7,12 @@ import { Router } from "@angular/router";
 
 @Injectable()
 
-class AppInterceptor implements HttpInterceptor {
+export class AppInterceptor implements HttpInterceptor {
     private api = environment.api;
     private headers = new HttpHeaders(environment.apiHeaders);
+
     constructor(private router: Router) { }
+    
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (req.url.startsWith('api/')) {
