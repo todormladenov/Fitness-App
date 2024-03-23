@@ -9,11 +9,13 @@ import { UserModule } from './user/user.module';
 import { ProgramModule } from './program/program.module';
 import { HttpClientModule } from '@angular/common/http'
 import { appInterceptorProvider } from './app.interceptor';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    AuthenticateComponent
   ],
   imports: [
     BrowserModule,
