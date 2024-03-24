@@ -4,6 +4,7 @@ import { CreateProgramComponent } from './create-program/create-program.componen
 import { ProgramListComponent } from './program-list/program-list.component';
 import { DetailsComponent } from './details/details.component';
 import { ProgramRoutingModule } from './program-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { ProgramRoutingModule } from './program-routing.module';
   ],
   imports: [
     CommonModule,
-    ProgramRoutingModule
+    ProgramRoutingModule,
+    FormsModule
   ]
 })
 export class ProgramModule { }

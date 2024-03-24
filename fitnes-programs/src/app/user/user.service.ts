@@ -18,6 +18,10 @@ export class UserService implements OnDestroy {
     return !!this.user;
   }
 
+  get userId(){
+    return this.user?.objectId
+  }
+
   constructor(private http: HttpClient) {
     this.userSubscription = this.user$.subscribe((user) => this.user = user);
   }
