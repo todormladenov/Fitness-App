@@ -10,14 +10,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-program.component.css']
 })
 export class CreateProgramComponent {
+  isLoading = false;
 
   constructor(private userService: UserService, private programService: ProgramService, private router: Router) { }
 
   create(form: NgForm) {
     const { title, type, image, price, description } = form.value;
     const ownerId = this.userService.userId;
-    
+
+    this.isLoading = true;
+
     this.programService.createProgram(title, type, image, price, description, ownerId!).subscribe(() => {
+      this.isLoading = false
       this.router.navigate(['/home']);
     });
   }

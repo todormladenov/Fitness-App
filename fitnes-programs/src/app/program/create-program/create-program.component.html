@@ -1,6 +1,7 @@
 <div class="create-workout">
     <h3>Create Workout Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="create(form)">
+        <app-loader *ngIf="isLoading"/>
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" placeholder="Title" name="title" value="" ngModel #titleInput>

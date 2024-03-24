@@ -1,10 +1,12 @@
 .create-workout {
+    position: relative;
     width: 360px;
     padding: auto;
     margin: auto;
 }
 
 .form {
+    position: relative;
     background-color: wheat;
     display: flex;
     flex-direction: column;
