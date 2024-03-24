@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
+  isLoading = false;
   constructor(private userService: UserService, private router: Router) { }
 
   register(form: NgForm) {
@@ -17,10 +17,13 @@ export class RegisterComponent {
       return;
     }
 
+    this.isLoading = true;
+
     const { email, username, password } = form.value
 
     this.userService.registerUser(email, username, password)
       .subscribe((user) => {
+        this.isLoading = false;
         this.router.navigate(['/user/login'])
       });
   }

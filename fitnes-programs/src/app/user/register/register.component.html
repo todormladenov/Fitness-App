@@ -1,7 +1,7 @@
 <div class="register">
     <h3>Register Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="register(form)">
-
+        <app-loader *ngIf="isLoading"/>
         <!-- email -->
         <div class="form-group">
             <label for="email">Email</label>
@@ -53,7 +53,7 @@
         <div class="form-group">
             <label for="RePassword">Repeat Password</label>
             <input type="password" placeholder="Repeat Password" name="RePassword" ngModel #rePasswordInput="ngModel"
-            [appPasswordMatch]="passwordInput.value">
+                [appPasswordMatch]="passwordInput.value">
         </div>
 
         <ng-container *ngIf="rePasswordInput.touched">
@@ -61,7 +61,7 @@
                 Passwords must match!
             </p>
         </ng-container>
-        
+
         <a routerLink="/user/login">Already have account? Login here.</a>
         <input type="submit" value="Register" [disabled]="form.invalid">
     </form>

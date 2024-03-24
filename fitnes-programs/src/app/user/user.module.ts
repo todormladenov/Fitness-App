@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserRoutingModule } from './user-routing.module';
 import { FormsModule } from '@angular/forms';
 import { PasswordMatchDirective } from './directives/password-match.directive';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -17,7 +18,8 @@ import { PasswordMatchDirective } from './directives/password-match.directive';
   imports: [
     CommonModule,
     UserRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class UserModule { }

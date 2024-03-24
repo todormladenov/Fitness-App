@@ -1,6 +1,7 @@
 <div class="login">
     <h3>Login Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="login(form)">
+        <app-loader *ngIf="isLoading"/>
 
         <!-- username -->
         <div class="form-group">

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  isLoading = false
   constructor(private userService: UserService, private router: Router) { }
 
   login(form: NgForm) {
@@ -17,8 +17,11 @@ export class LoginComponent {
       return
     }
 
+    this.isLoading = true;
+
     const { username, password } = form.value
     this.userService.loginUser(username, password).subscribe((user) => {
+      this.isLoading = false
       this.router.navigate(['/home'])
     });
   }
