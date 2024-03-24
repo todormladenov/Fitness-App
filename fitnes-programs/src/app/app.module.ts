@@ -11,12 +11,14 @@ import { HttpClientModule } from '@angular/common/http'
 import { appInterceptorProvider } from './app.interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { SharedModule } from './shared/shared.module';
+import { GlobalLoaderComponent } from './global-loader/global-loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    GlobalLoaderComponent
   ],
   imports: [
     BrowserModule,
