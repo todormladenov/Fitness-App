@@ -6,6 +6,7 @@ import { DetailsComponent } from './details/details.component';
 import { ProgramRoutingModule } from './program-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ProgramComponent } from './program/program.component';
 
 
 
@@ -13,7 +14,8 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     CreateProgramComponent,
     ProgramListComponent,
-    DetailsComponent
+    DetailsComponent,
+    ProgramComponent
   ],
   imports: [
     CommonModule,
