@@ -32,10 +32,11 @@ select {
     border: 1px solid #ddd;
     border-radius: 5px;
     min-width: 191px;
-    width: auto; 
+    width: auto;
 }
 
 input[type="text"],
+input[type="number"],
 input[type="password"],
 textarea {
     padding: 0.75em 1em;
@@ -63,4 +64,20 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #000000;
+}
+
+p.error {
+    color: red;
+}
+
+input.ng-valid,
+select.ng-valid,
+textarea.ng-valid {
+    border-left: 5px solid green;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border-left: 5px solid red
 }

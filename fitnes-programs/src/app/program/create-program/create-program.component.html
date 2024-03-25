@@ -1,32 +1,85 @@
 <div class="create-workout">
     <h3>Create Workout Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="create(form)">
-        <app-loader *ngIf="isLoading"/>
+        <app-loader *ngIf="isLoading" />
+
+        <!-- Title -->
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" placeholder="Title" name="title" value="" ngModel #titleInput>
+            <input type="text" placeholder="Title" name="title" value="" ngModel #titleInput="ngModel" required
+                maxlength="25">
         </div>
+
+        <ng-container *ngIf="titleInput.touched">
+            <p class="error" *ngIf="titleInput.errors?.['required']">
+                Title is required!
+            </p>
+            <p class="error" *ngIf="titleInput.errors?.['maxlength']">
+                Title is too long!
+            </p>
+        </ng-container>
+
+        <!-- Type -->
         <div class="form-group">
             <label for="type">Type</label>
-            <select name="type" id="type" ngModel #typeInput>
+            <select name="type" id="type" ngModel #typeInput="ngModel" required>
                 <option value="Cardio">Cardio</option>
                 <option value="Crossfit">Crossfit</option>
                 <option value="Strength">Strength</option>
                 <option value="Hypertrophy">Hypertrophy</option>
             </select>
         </div>
+
+        <ng-container *ngIf="typeInput.touched">
+            <p class="error" *ngIf="typeInput.errors?.['required']">
+                Title is required!
+            </p>
+        </ng-container>
+
+        <!-- Image -->
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="text" placeholder="Image" name="image" value="" ngModel #imageInput>
+            <input type="text" placeholder="Image" name="image" value="" ngModel #imageInput="ngModel" required>
         </div>
+
+        <ng-container *ngIf="imageInput.touched">
+            <p class="error" *ngIf="imageInput.errors?.['required']">
+                Image is required!
+            </p>
+        </ng-container>
+
+        <!-- Price -->
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" placeholder="Price" name="price" value="" ngModel #priceInput>
+            <input type="number" placeholder="Price" name="price" value="" ngModel #priceInput="ngModel" required
+                min="0">
         </div>
+
+        <ng-container *ngIf="priceInput.touched">
+            <p class="error" *ngIf="priceInput.errors?.['required']">
+                Price is required!
+            </p>
+            <p class="error" *ngIf="priceInput.errors?.['min']">
+                Price must be positive number!
+            </p>
+        </ng-container>
+
+        <!-- Description -->
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea placeholder="Description" name="description" ngModel #descriptionInput></textarea>
+            <textarea placeholder="Description" name="description" ngModel #descriptionInput="ngModel" required
+                minlength="20"></textarea>
         </div>
-        <input type="submit" value="Create">
+
+        <ng-container *ngIf="descriptionInput.touched">
+            <p class="error" *ngIf="descriptionInput.errors?.['required']">
+                Price is required!
+            </p>
+            <p class="error" *ngIf="descriptionInput.errors?.['minlength']">
+                Description is too short!
+            </p>
+        </ng-container>
+
+        <input type="submit" value="Create" [disabled]="form.invalid">
     </form>
 </div>

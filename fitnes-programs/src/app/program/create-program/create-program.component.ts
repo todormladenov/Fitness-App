@@ -15,6 +15,10 @@ export class CreateProgramComponent {
   constructor(private userService: UserService, private programService: ProgramService, private router: Router) { }
 
   create(form: NgForm) {
+    if (form.invalid) {
+      return
+    }
+    
     const { title, type, image, price, description } = form.value;
     const ownerId = this.userService.userId;
 
