@@ -19,12 +19,12 @@ export class CreateProgramComponent {
       return
     }
     
-    const { title, type, image, price, description } = form.value;
+    const { title, description, type, image, price } = form.value;
     const ownerId = this.userService.userId;
 
     this.isLoading = true;
 
-    this.programService.createProgram(title, type, image, price, description, ownerId!).subscribe(() => {
+    this.programService.createProgram(title, description, type, image, price, ownerId!).subscribe(() => {
       this.isLoading = false
       this.router.navigate(['/home']);
     });

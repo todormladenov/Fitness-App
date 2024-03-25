@@ -1,1 +1,6 @@
-<p>{{program?.title}}</p>
+<div class="workout-box">
+    <h2>{{program?.title}}</h2>
+    <p>{{program?.type}}</p>
+    <img src="{{program?.image}}" alt="IMG">
+    <a [routerLink]="['/programs', program?.objectId]">Details</a>
+</div>
