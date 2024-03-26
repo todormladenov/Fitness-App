@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramService } from '../program.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Program } from '../types/program';
 import { GlobalLoaderService } from 'src/app/core/global-loader.service';
 
@@ -11,12 +11,14 @@ import { GlobalLoaderService } from 'src/app/core/global-loader.service';
 })
 export class DetailsComponent implements OnInit {
   program = {} as Program;
+  programId: string = '';
   isShown = false;
 
   constructor(
     private programService: ProgramService,
     private activeRoute: ActivatedRoute,
-    private globalLoaderService: GlobalLoaderService) { }
+    private globalLoaderService: GlobalLoaderService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getProgram();
@@ -25,13 +27,19 @@ export class DetailsComponent implements OnInit {
   getProgram() {
     this.globalLoaderService.showLoader();
     this.activeRoute.params.subscribe((data) => {
-      const programId = data['programId'];
+      this.programId = data['programId'];
 
-      this.programService.getProgramById(programId).subscribe((data) => {
+      this.programService.getProgramById(this.programId).subscribe((data) => {
         this.program = data;
         this.globalLoaderService.hideLoader();
       });
     })
+  }
+
+  delete() {
+    this.programService.deleteProgram(this.programId).subscribe((res) => {
+      this.router.navigate(['/programs']);
+    });
   }
 
   get isLoading() {

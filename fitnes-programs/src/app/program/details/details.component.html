@@ -20,7 +20,7 @@
         <button class="show-exercise" (click)="toggleList()" *ngIf="isShown">Hide Exercises</button>
         <div class="program-actions">
             <a>Edit</a>
-            <a>Delete</a>
+            <a (click)="delete()">Delete</a>
             <a>Subscribe</a>
         </div>
     </div>

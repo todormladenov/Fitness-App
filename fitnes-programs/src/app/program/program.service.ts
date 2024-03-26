@@ -35,4 +35,8 @@ export class ProgramService {
 
     return this.http.post<CreatedProgram>('api/classes/Program', programData);
   }
+
+  deleteProgram(programId: string) {
+    return this.http.delete<{}>(`api/classes/Program/${programId}`);
+  }
 }
