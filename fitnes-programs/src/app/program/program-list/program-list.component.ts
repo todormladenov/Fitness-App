@@ -18,11 +18,11 @@ export class ProgramListComponent implements OnInit {
   }
 
   getPrograms() {
-    this.globalLoaderService.isLoading = true;
+    this.globalLoaderService.showLoader();
 
     this.programService.getPrograms().subscribe(data => {
       this.programsList = data.results;
-      this.globalLoaderService.isLoading = false;
+      this.globalLoaderService.hideLoader();
     })
   }
 }
