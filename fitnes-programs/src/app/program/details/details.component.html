@@ -1,13 +1,10 @@
-<div class="details-container">
+<div class="details-container" *ngIf="!isLoading">
     <div class="details">
-        <img src="https://athleanx.com/wp-content/uploads/2022/12/FULL-BODY-WORKOUTS.jpg" alt="IMG">
-        <h2>Name: Full Body Workout</h2>
-        <p>Type: Hypertrophy</p>
-        <p class="program-description">Description: Full-body workout: you are exercising your whole body, with all
-            major muscle groups - the entire body, essentially - being used and stimulated in one workout. You'll be
-            building muscle by combining exercises that use the upper body and lower body, plus the core, in one
-            training session.</p>
-        <p>Price: 50$</p>
+        <img src="{{program.image}}" alt="IMG">
+        <h2>Name: {{program.title}}</h2>
+        <p>Type: {{program.type}}</p>
+        <p class="program-description">Description: {{program.description}}</p>
+        <p>Price: {{program.price}}$</p>
         <div class="exercise-list" *ngIf="isShown">
             <ul>
                 <li>
@@ -19,7 +16,8 @@
                 </li>
             </ul>
         </div>
-        <button class="show-exercise" (click)="toggleList()">Show Exercises</button>
+        <button class="show-exercise" (click)="toggleList()" *ngIf="!isShown">Show Exercises</button>
+        <button class="show-exercise" (click)="toggleList()" *ngIf="isShown">Hide Exercises</button>
         <div class="program-actions">
             <a>Edit</a>
             <a>Delete</a>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createPointer } from '../shared/utils/create-pointer';
-import { CreatedProgram } from './types/program';
+import { CreatedProgram, Program } from './types/program';
 import { ReadingApiResponse } from '../shared/types/response';
 
 @Injectable({
@@ -15,8 +15,12 @@ export class ProgramService {
     return this.http.get<ReadingApiResponse>('api/classes/Program');
   }
 
-  getNewestProgram(){
+  getNewestProgram() {
     return this.http.get<ReadingApiResponse>('api/classes/Program?order=-createdAt&limit=1');
+  }
+
+  getProgramById(programId: string) {
+    return this.http.get<Program>(`api/classes/Program/${programId}`);
   }
 
   createProgram(title: string, description: string, type: string, image: string, price: string, ownerId: string) {
