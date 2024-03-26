@@ -7,6 +7,7 @@ import { ProgramRoutingModule } from './program-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProgramComponent } from './program/program.component';
+import { EditProgramComponent } from './edit-program/edit-program.component';
 
 
 
@@ -15,7 +16,8 @@ import { ProgramComponent } from './program/program.component';
     CreateProgramComponent,
     ProgramListComponent,
     DetailsComponent,
-    ProgramComponent
+    ProgramComponent,
+    EditProgramComponent
   ],
   imports: [
     CommonModule,

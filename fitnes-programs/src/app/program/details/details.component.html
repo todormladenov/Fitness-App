@@ -19,7 +19,7 @@
         <button class="show-exercise" (click)="toggleList()" *ngIf="!isShown">Show Exercises</button>
         <button class="show-exercise" (click)="toggleList()" *ngIf="isShown">Hide Exercises</button>
         <div class="program-actions">
-            <a>Edit</a>
+            <a [routerLink]="['/programs', program.objectId, 'edit']">Edit</a>
             <a (click)="delete()">Delete</a>
             <a>Subscribe</a>
         </div>
