@@ -22,6 +22,9 @@ import { ProgramComponent } from './program/program.component';
     ProgramRoutingModule,
     FormsModule,
     SharedModule
+  ],
+  exports: [
+    ProgramComponent
   ]
 })
 export class ProgramModule { }

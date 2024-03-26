@@ -15,6 +15,10 @@ export class ProgramService {
     return this.http.get<ReadingApiResponse>('api/classes/Program');
   }
 
+  getNewestProgram(){
+    return this.http.get<ReadingApiResponse>('api/classes/Program?order=-createdAt&limit=1');
+  }
+
   createProgram(title: string, description: string, type: string, image: string, price: string, ownerId: string) {
     const programData = {
       title,
