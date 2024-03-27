@@ -16,12 +16,13 @@
                 </li>
             </ul>
         </div>
-        <button class="show-exercise" (click)="toggleList()" *ngIf="!isShown">Show Exercises</button>
-        <button class="show-exercise" (click)="toggleList()" *ngIf="isShown">Hide Exercises</button>
-        <div class="program-actions">
-            <a [routerLink]="['/programs', program.objectId, 'edit']">Edit</a>
-            <a (click)="delete()">Delete</a>
-            <a>Subscribe</a>
+        <button class="show-exercise" (click)="toggleList()">
+            {{ isShown ? 'Hide Exercises' : 'Show Exercises' }}
+        </button>
+        <div class="program-actions" *ngIf="isLoggedIn">
+            <a [routerLink]="['/programs', program.objectId, 'edit']" *ngIf="isOwner">Edit</a>
+            <a (click)="delete()" *ngIf="isOwner">Delete</a>
+            <a *ngIf="!isOwner">Subscribe</a>
         </div>
     </div>
 </div>

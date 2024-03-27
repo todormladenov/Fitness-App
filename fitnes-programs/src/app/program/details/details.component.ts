@@ -3,6 +3,7 @@ import { ProgramService } from '../program.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Program } from '../types/program';
 import { GlobalLoaderService } from 'src/app/core/global-loader.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-details',
@@ -13,11 +14,13 @@ export class DetailsComponent implements OnInit {
   program = {} as Program;
   programId: string = '';
   isShown = false;
+  isOwner = false;
 
   constructor(
     private programService: ProgramService,
     private activeRoute: ActivatedRoute,
     private globalLoaderService: GlobalLoaderService,
+    private userService: UserService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -31,6 +34,7 @@ export class DetailsComponent implements OnInit {
 
       this.programService.getProgramById(this.programId).subscribe((data) => {
         this.program = data;
+        this.isOwner = this.userService.userId === data.owner.objectId;
         this.globalLoaderService.hideLoader();
       });
     })
@@ -40,6 +44,10 @@ export class DetailsComponent implements OnInit {
     this.programService.deleteProgram(this.programId).subscribe((res) => {
       this.router.navigate(['/programs']);
     });
+  }
+
+  get isLoggedIn() {
+    return this.userService.isLoggedIn;
   }
 
   get isLoading() {
