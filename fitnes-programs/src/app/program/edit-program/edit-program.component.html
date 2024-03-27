@@ -1,1 +1,83 @@
-<p>edit-program works!</p>
+<div class="edit-workout" *ngIf="!globalLoaderIsLoading">
+    <h3>Edit Workout Form</h3>
+    <form class="form" [formGroup]="form" (ngSubmit)="edit()">
+        <app-loader *ngIf="false" />
+
+        <!-- Title -->
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" placeholder="Title" name="title" [value]="program.title" formControlName="title">
+        </div>
+
+        <ng-container *ngIf="form.get('title')?.touched">
+            <p class="error" *ngIf="form.get('title')?.errors?.['required']">
+                Title is required!
+            </p>
+            <p class="error" *ngIf="form.get('title')?.errors?.['maxlength']">
+                Title is too long!
+            </p>
+        </ng-container>
+
+        <!-- Type -->
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type" id="type" [value]="program.type" formControlName="type">
+                <option value="Cardio">Cardio</option>
+                <option value="Crossfit">Crossfit</option>
+                <option value="Strength">Strength</option>
+                <option value="Hypertrophy">Hypertrophy</option>
+            </select>
+        </div>
+
+        <ng-container *ngIf="form.get('type')?.touched">
+            <p class="error" *ngIf="form.get('type')?.errors?.['required']">
+                Title is required!
+            </p>
+        </ng-container>
+
+        <!-- Image -->
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" placeholder="Image" name="image" [value]="program.image" formControlName="image">
+        </div>
+
+        <ng-container *ngIf="form.get('image')?.touched">
+            <p class="error" *ngIf="form.get('image')?.errors?.['required']">
+                Image is required!
+            </p>
+        </ng-container>
+
+        <!-- Price -->
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" placeholder="Price" name="price" [value]="program.price" formControlName="price">
+        </div>
+
+        <ng-container *ngIf="form.get('price')?.touched">
+            <p class="error" *ngIf="form.get('price')?.errors?.['required']">
+                Price is required!
+            </p>
+            <p class="error" *ngIf="form.get('price')?.errors?.['min']">
+                Price must be positive number!
+            </p>
+        </ng-container>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea placeholder="Description" name="description" [value]="program.description"
+                formControlName="description"></textarea>
+        </div>
+
+        <ng-container *ngIf="form.get('description')?.touched">
+            <p class="error" *ngIf="form.get('description')?.errors?.['required']">
+                Price is required!
+            </p>
+            <p class="error" *ngIf="form.get('description')?.errors?.['minlength']">
+                Description is too short!
+            </p>
+        </ng-container>
+
+        <input type="submit" value="Create" [disabled]="form.invalid">
+    </form>
+</div>
