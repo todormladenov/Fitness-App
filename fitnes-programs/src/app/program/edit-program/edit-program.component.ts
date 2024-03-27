@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Program } from '../types/program';
 import { ProgramService } from '../program.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalLoaderService } from 'src/app/core/global-loader.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { GlobalLoaderService } from 'src/app/core/global-loader.service';
 export class EditProgramComponent implements OnInit {
   programId: string = '';
   program = {} as Program;
+  sharedLoaderIsLoading = false;
 
   form = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(25)]],
@@ -26,6 +27,7 @@ export class EditProgramComponent implements OnInit {
     private programService: ProgramService,
     private activeRoute: ActivatedRoute,
     private globalLoaderService: GlobalLoaderService,
+    private router: Router,
     private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,7 +35,18 @@ export class EditProgramComponent implements OnInit {
   }
 
   edit() {
-    
+    if (this.form.invalid) {
+      return
+    }
+    this.sharedLoaderIsLoading = true;
+
+    const { title, type, image, price, description } = this.form.value as Program;
+    const owner = this.program.owner.objectId
+    this.programService.updateProgram(this.programId, title, type, image, price, description, owner)
+      .subscribe((res) => {
+        this.sharedLoaderIsLoading = false;
+        this.router.navigate([`/programs/${this.programId}`]);
+      })
   }
 
   get globalLoaderIsLoading() {

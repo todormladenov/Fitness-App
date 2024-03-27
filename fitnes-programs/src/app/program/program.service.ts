@@ -39,4 +39,17 @@ export class ProgramService {
   deleteProgram(programId: string) {
     return this.http.delete<{}>(`api/classes/Program/${programId}`);
   }
+
+  updateProgram(programId: string, title: string, type: string, image: string, price: string, description: string, ownerId: string) {
+    const programData = {
+      title,
+      description,
+      type,
+      image,
+      price,
+      owner: createPointer('_User', ownerId)
+    };
+
+    return this.http.put<{}>(`api/classes/Program/${programId}`, programData);
+  }
 }

@@ -1,7 +1,7 @@
 <div class="edit-workout" *ngIf="!globalLoaderIsLoading">
     <h3>Edit Workout Form</h3>
     <form class="form" [formGroup]="form" (ngSubmit)="edit()">
-        <app-loader *ngIf="false" />
+        <app-loader *ngIf="sharedLoaderIsLoading" />
 
         <!-- Title -->
         <div class="form-group">
