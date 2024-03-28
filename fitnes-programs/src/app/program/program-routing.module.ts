@@ -4,6 +4,7 @@ import { ProgramListComponent } from './program-list/program-list.component';
 import { DetailsComponent } from './details/details.component';
 import { CreateProgramComponent } from './create-program/create-program.component';
 import { EditProgramComponent } from './edit-program/edit-program.component';
+import { AuthActivate } from '../guards/auth.activate';
 
 const routes: Routes = [
     {
@@ -13,7 +14,7 @@ const routes: Routes = [
             { path: ':programId/edit', component: EditProgramComponent }
         ]
     },
-    { path: 'create-program', component: CreateProgramComponent }
+    { path: 'create-program', component: CreateProgramComponent, canActivate: [AuthActivate] }
 ];
 
 @NgModule({
