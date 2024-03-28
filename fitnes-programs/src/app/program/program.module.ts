@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProgramComponent } from './program/program.component';
 import { EditProgramComponent } from './edit-program/edit-program.component';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { EditProgramComponent } from './edit-program/edit-program.component';
     ProgramRoutingModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
   exports: [
     ProgramComponent

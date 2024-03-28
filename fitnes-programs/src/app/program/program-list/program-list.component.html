@@ -1,3 +1,5 @@
-<div class="catalog">
-    <app-program *ngFor="let program of programsList" [program]="program" />
+<div class="catalog" infinite-scroll
+[infiniteScrollDistance]="2"
+(scrolled)="scrolled()">
+    <app-program *ngFor="let program of programs" [program]="program" />
 </div>

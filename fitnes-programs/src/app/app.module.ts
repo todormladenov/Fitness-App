@@ -10,7 +10,6 @@ import { ProgramModule } from './program/program.module';
 import { HttpClientModule } from '@angular/common/http'
 import { appInterceptorProvider } from './app.interceptor';
 import { SharedModule } from './shared/shared.module';
-import { GlobalLoaderComponent } from './core/global-loader/global-loader.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,7 @@ import { GlobalLoaderComponent } from './core/global-loader/global-loader.compon
     CoreModule,
     UserModule,
     ProgramModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
