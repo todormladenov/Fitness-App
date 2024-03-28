@@ -3,16 +3,26 @@ import { Injectable } from '@angular/core';
 import { createPointer } from '../shared/utils/create-pointer';
 import { CreatedProgram, Program } from './types/program';
 import { ReadingApiResponse } from '../shared/types/response';
+import { Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProgramService {
+  private programs$$ = new Subject<Program[]>();
+  programs$ = this.programs$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  getPrograms() {
-    return this.http.get<ReadingApiResponse>('api/classes/Program');
+  private fetchPrograms(limit: number, skip: number) {
+    return this.http.get<ReadingApiResponse>(`api/classes/Program?limit=${limit}&skip=${skip}`)
+      .pipe(tap((data) => {
+        this.programs$$.next(data.results);
+      }))
+  }
+
+  getPrograms(limit: number, skip: number) {
+    return this.fetchPrograms(limit, skip);
   }
 
   getNewestProgram() {
