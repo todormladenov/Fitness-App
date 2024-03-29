@@ -10,6 +10,7 @@ import { ProgramModule } from './program/program.module';
 import { HttpClientModule } from '@angular/common/http'
 import { appInterceptorProvider } from './app.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { ExerciseModule } from './exercise/exercise.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     UserModule,
     ProgramModule,
     HttpClientModule,
+    ExerciseModule
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
