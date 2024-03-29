@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/shared/loader/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -9,21 +10,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  isLoading = false;
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private loaderService: LoaderService) { }
 
+  get isLoading() {
+    return this.loaderService.isLoading();
+  }
+  
   register(form: NgForm) {
     if (form.invalid) {
       return;
     }
 
-    this.isLoading = true;
+    this.loaderService.setLoadingState(true);
 
     const { email, username, password } = form.value
 
     this.userService.registerUser(email, username, password)
       .subscribe((user) => {
-        this.isLoading = false;
+        this.loaderService.setLoadingState(false);
         this.router.navigate(['/user/login'])
       });
   }

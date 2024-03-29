@@ -1,7 +1,7 @@
 <div class="register">
     <h3>Register Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="register(form)">
-        <app-loader *ngIf="isLoading"/>
+        <app-loader *ngIf="isLoading | async"/>
         <!-- email -->
         <div class="form-group">
             <label for="email">Email</label>
