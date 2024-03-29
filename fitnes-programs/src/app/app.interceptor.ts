@@ -4,6 +4,7 @@ import { Observable, catchError } from "rxjs";
 import { environment } from "src/environments/environment.development";
 import { getItem } from "./user/utils/storage-management";
 import { Router } from "@angular/router";
+import { ErrorService } from "./core/error/error.service";
 
 @Injectable()
 
@@ -11,8 +12,8 @@ export class AppInterceptor implements HttpInterceptor {
     private api = environment.api;
     private headers = new HttpHeaders(environment.apiHeaders);
 
-    constructor(private router: Router) { }
-    
+    constructor(private router: Router, private errorService: ErrorService) { }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (req.url.startsWith('api/')) {
@@ -23,7 +24,7 @@ export class AppInterceptor implements HttpInterceptor {
         }
 
         const sessionToken = getItem('AuthToken');
-        
+
         if (sessionToken) {
 
             req = req.clone({
@@ -35,8 +36,10 @@ export class AppInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((err) => {
                 if (err.error.code === 209) {
-                    this.router.navigate(['/user/login'])
+                    return this.router.navigate(['/user/login'])
                 }
+                this.errorService.setError(err?.error);
+
                 return [err]
             })
         )

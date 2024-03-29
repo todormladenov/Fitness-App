@@ -5,6 +5,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { FooterComponent } from './footer/footer.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { GlobalLoaderComponent } from './global-loader/global-loader.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -14,6 +15,7 @@ import { GlobalLoaderComponent } from './global-loader/global-loader.component';
     FooterComponent,
     AuthenticateComponent,
     GlobalLoaderComponent,
+    ErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { GlobalLoaderComponent } from './global-loader/global-loader.component';
     HeaderComponent,
     FooterComponent,
     AuthenticateComponent,
-    GlobalLoaderComponent
+    GlobalLoaderComponent,
+    ErrorComponent
   ]
 })
 export class CoreModule { }
