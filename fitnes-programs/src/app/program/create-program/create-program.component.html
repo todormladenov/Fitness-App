@@ -1,7 +1,7 @@
 <div class="create-workout">
     <h3>Create Workout Form</h3>
     <form class="form" #form="ngForm" (ngSubmit)="create(form)">
-        <app-loader *ngIf="isLoading" />
+        <app-loader *ngIf="isLoading | async" />
 
         <!-- Title -->
         <div class="form-group">
