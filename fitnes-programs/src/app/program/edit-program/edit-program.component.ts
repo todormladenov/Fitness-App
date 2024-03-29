@@ -4,6 +4,7 @@ import { Program } from '../types/program';
 import { ProgramService } from '../program.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalLoaderService } from 'src/app/core/global-loader/global-loader.service';
+import { LoaderService } from 'src/app/shared/loader/loader.service';
 
 @Component({
   selector: 'app-edit-program',
@@ -28,7 +29,12 @@ export class EditProgramComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private globalLoaderService: GlobalLoaderService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private sharedLoaderService: LoaderService) { }
+
+  get isLoading() {
+    return this.sharedLoaderService.isLoading();
+  }
 
   ngOnInit(): void {
     this.getProgram();
@@ -36,15 +42,17 @@ export class EditProgramComponent implements OnInit {
 
   edit() {
     if (this.form.invalid) {
-      return
+      return;
     }
-    this.sharedLoaderIsLoading = true;
+
+    this.sharedLoaderService.setLoadingState(true);
 
     const { title, type, image, price, description } = this.form.value as Program;
-    const owner = this.program.owner.objectId
+    const owner = this.program.owner.objectId;
+
     this.programService.updateProgram(this.programId, title, type, image, price, description, owner)
       .subscribe((res) => {
-        this.sharedLoaderIsLoading = false;
+        this.sharedLoaderService.setLoadingState(false);
         this.router.navigate([`/programs/${this.programId}`]);
       })
   }
