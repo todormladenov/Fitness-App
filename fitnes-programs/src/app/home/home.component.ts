@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramService } from '../program/program.service';
 import { Program } from '../program/types/program';
-import { GlobalLoaderService } from '../core/global-loader.service';
+import { GlobalLoaderService } from '../core/global-loader/global-loader.service';
 
 @Component({
   selector: 'app-home',

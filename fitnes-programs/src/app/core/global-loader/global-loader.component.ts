@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalLoaderService } from '../global-loader.service';
+import { GlobalLoaderService } from './global-loader.service';
 
 @Component({
   selector: 'app-global-loader',

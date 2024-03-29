@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProgramService } from '../program.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Program } from '../types/program';
-import { GlobalLoaderService } from 'src/app/core/global-loader.service';
+import { GlobalLoaderService } from 'src/app/core/global-loader/global-loader.service';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({

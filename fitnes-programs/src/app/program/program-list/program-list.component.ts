@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProgramService } from '../program.service';
 import { Program } from '../types/program';
-import { GlobalLoaderService } from 'src/app/core/global-loader.service';
+import { GlobalLoaderService } from 'src/app/core/global-loader/global-loader.service';
 import { Subscription } from 'rxjs';
 
 @Component({

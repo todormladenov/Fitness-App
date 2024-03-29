@@ -3,7 +3,7 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Program } from '../types/program';
 import { ProgramService } from '../program.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GlobalLoaderService } from 'src/app/core/global-loader.service';
+import { GlobalLoaderService } from 'src/app/core/global-loader/global-loader.service';
 
 @Component({
   selector: 'app-edit-program',
