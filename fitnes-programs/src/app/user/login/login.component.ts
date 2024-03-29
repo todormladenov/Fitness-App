@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/shared/loader/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +10,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  isLoading = false
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private loaderService: LoaderService) { }
+
+  get isLoading() {
+    return this.loaderService.isLoading();
+  }
 
   login(form: NgForm) {
     if (form.invalid) {
       return
     }
 
-    this.isLoading = true;
+    this.loaderService.setLoadingState(true);
 
-    const { username, password } = form.value
+    const { username, password } = form.value;
+
     this.userService.loginUser(username, password).subscribe((user) => {
-      this.isLoading = false
+      this.loaderService.setLoadingState(false);
       this.router.navigate(['/home'])
     });
   }
