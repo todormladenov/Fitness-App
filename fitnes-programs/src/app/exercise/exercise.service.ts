@@ -31,4 +31,8 @@ export class ExerciseService {
 
     return this.http.post<CreatedExercise>('api/classes/Exercise', exerciseData);
   }
+
+  delete(exerciseId: string){
+    return this.http.delete<{}>(`api/classes/Exercise/${exerciseId}`);
+  }
 }

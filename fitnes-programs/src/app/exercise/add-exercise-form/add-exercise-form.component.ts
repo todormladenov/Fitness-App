@@ -31,7 +31,7 @@ export class AddExerciseFormComponent implements OnInit {
       sets,
       repetitions
     });
-
+        
     this.form.disable();
   }
 
@@ -45,6 +45,16 @@ export class AddExerciseFormComponent implements OnInit {
   }
 
   delete() {
+    if (!confirm('Are you sure you want to delete this exercise ?')) {
+      return;
+    }
+
+    if (this.exercise.objectId) {
+      this.exerciseService.delete(this.exercise.objectId).subscribe((res) => {
+        console.log(res);
+      });
+    }  
+    
     this.deleteExercise(this.index);
   }
 
