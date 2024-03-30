@@ -10,3 +10,8 @@ export interface Exercise {
     program: Pointer | null,
     owner: Pointer | null
 }
+
+export interface CreatedExercise {
+    objectId: string,
+    createdAt: string,
+}
