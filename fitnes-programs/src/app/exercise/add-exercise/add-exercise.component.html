@@ -1,1 +1,6 @@
-<p>add-exercise works!</p>
+<button class="add-exercise-btn" (click)="addExercise()">Add Exercise</button>
+<div class="add-exercise-container">
+    <ng-container *ngFor="let exercise of exerciseList">
+        <app-add-exercise-form [exercise]="exercise" />
+    </ng-container>
+</div>
