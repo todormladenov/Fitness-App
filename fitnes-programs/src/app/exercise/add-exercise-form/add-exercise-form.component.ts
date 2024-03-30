@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Exercise } from '../types/exercise';
 import { ExerciseService } from '../exercise.service';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -10,25 +9,18 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './add-exercise-form.component.html',
   styleUrls: ['./add-exercise-form.component.css']
 })
-export class AddExerciseFormComponent implements OnInit {
+export class AddExerciseFormComponent {
   @Input('exercise') exercise = {} as Exercise;
   @Input('deleteExercise') deleteExercise!: (index: number) => void;
   @Input('index') index!: number;
-  programId: string = '';
+  @Input('programId') programId: string = '';
   userId: string = '';
 
   isDisabled = true;
 
   constructor(
     private exerciseService: ExerciseService,
-    private activatedRoute: ActivatedRoute,
     private userService: UserService) { }
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe((data) => {
-      this.programId = data['programId'];
-    });
-  }
 
   edit() {
     this.isDisabled = false;

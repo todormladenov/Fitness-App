@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Exercise } from '../types/exercise';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-exercise',
@@ -8,6 +9,9 @@ import { Exercise } from '../types/exercise';
 })
 export class AddExerciseComponent implements OnInit {
   exerciseList: Exercise[] = [];
+  programId: string = '';
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   addExercise() {
     const newExercise: Exercise = {
@@ -25,7 +29,10 @@ export class AddExerciseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addExercise()
+    this.activatedRoute.params.subscribe((data) => {
+      this.programId = data['programId'];
+      this.addExercise();
+    });
   }
 
   deleteExercise = (index: number) => {

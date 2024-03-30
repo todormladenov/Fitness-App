@@ -2,8 +2,9 @@
 <div class="add-exercise-container">
     <ng-container *ngFor="let exercise of exerciseList; let i = index">
         <app-add-exercise-form 
-        [exercise]="exercise"
-        [deleteExercise]="deleteExercise"
-        [index]="i" />
+        [exercise]="exercise" 
+        [deleteExercise]="deleteExercise" 
+        [index]="i"
+        [programId]="programId" />
     </ng-container>
 </div>
