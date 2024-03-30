@@ -17,6 +17,6 @@
         <button (click)="edit()" *ngIf="isDisabled">Edit</button>
         <button (click)="delete()" *ngIf="isDisabled">Delete</button>
         <button *ngIf="!isDisabled">Save</button>
-        <button *ngIf="!isDisabled">Cancel</button>
+        <button (click)="cancel()" *ngIf="!isDisabled">Cancel</button>
     </div>
 </div>

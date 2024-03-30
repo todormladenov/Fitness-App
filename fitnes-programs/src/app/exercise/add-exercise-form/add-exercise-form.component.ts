@@ -20,4 +20,8 @@ export class AddExerciseFormComponent {
   delete() {
     this.deleteExercise(this.index);
   }
+
+  cancel(){
+    this.isDisabled = true;
+  }
 }
