@@ -32,7 +32,19 @@ export class ExerciseService {
     return this.http.post<CreatedExercise>('api/classes/Exercise', exerciseData);
   }
 
-  delete(exerciseId: string){
+  update(title: string, sets: number, repetitions: string, objectId: string, programId: string, ownerId: string) {
+    const exerciseData = {
+      title,
+      sets,
+      repetitions,
+      program: createPointer('Program', programId),
+      owner: createPointer('_User', ownerId),
+    };
+
+    return this.http.put<{}>(`api/Classes/Exercise/${objectId}`, exerciseData);
+  }
+
+  delete(exerciseId: string) {
     return this.http.delete<{}>(`api/classes/Exercise/${exerciseId}`);
   }
 }

@@ -79,9 +79,17 @@ export class AddExerciseFormComponent implements OnInit {
 
     const { title, sets, repetitions } = this.form.value;
 
-    this.exerciseService.create(title!, sets!, repetitions!, this.programId, this.userId).subscribe((res) => {
-      this.exercise.objectId = res.objectId;
-      this.form.disable();
-    });
+    if (this.exercise.objectId) {
+      this.exerciseService.update(title!, sets!, repetitions!, this.exercise.objectId, this.programId, this.userId)
+        .subscribe((res) => {
+          this.form.disable();
+        });
+    } else {
+      this.exerciseService.create(title!, sets!, repetitions!, this.programId, this.userId)
+        .subscribe((res) => {
+          this.exercise.objectId = res.objectId;
+          this.form.disable();
+        });
+    }
   }
 }
