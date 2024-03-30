@@ -25,13 +25,13 @@ export class AddExerciseFormComponent implements OnInit {
 
   ngOnInit(): void {
     const { title, sets, repetitions } = this.exercise;
-  
+
     this.form.setValue({
       title,
       sets,
       repetitions
     });
-        
+
     this.form.disable();
   }
 
@@ -53,12 +53,18 @@ export class AddExerciseFormComponent implements OnInit {
       this.exerciseService.delete(this.exercise.objectId).subscribe((res) => {
         console.log(res);
       });
-    }  
-    
+    }
+
     this.deleteExercise(this.index);
   }
 
   cancel() {
+    this.form.reset({
+      title: this.exercise.title,
+      sets: this.exercise.sets,
+      repetitions: this.exercise.repetitions
+    });
+
     this.form.disable();
   }
 
