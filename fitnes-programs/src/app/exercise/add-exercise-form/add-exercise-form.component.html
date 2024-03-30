@@ -5,16 +5,36 @@
             <input type="text" name="title" placeholder="Exercise Title" [disabled]="isDisabled" ngModel
                 #titleInput="ngModel" required>
         </div>
+
+        <ng-container *ngIf="titleInput.touched">
+            <p class="error" *ngIf="titleInput.errors?.['required']">
+                Title is required!
+            </p>
+        </ng-container>
+
         <div>
             <label for="sets">Exercise Sets</label>
             <input type="number" name="sets" placeholder="Exercise Sets" [disabled]="isDisabled" ngModel
                 #setsInput="ngModel" required>
         </div>
+
+        <ng-container *ngIf="setsInput.touched">
+            <p class="error" *ngIf="setsInput.errors?.['required']">
+                Sets is required!
+            </p>
+        </ng-container>
+
         <div>
             <label for="repetitions">Exercise Repetitions</label>
             <input type="text" name="repetitions" placeholder="Exercise Repetitions" [disabled]="isDisabled" ngModel
                 #repetitionsInput="ngModel" required>
         </div>
+
+        <ng-container *ngIf="repetitionsInput.touched">
+            <p class="error" *ngIf="repetitionsInput.errors?.['required']">
+                Repetitions is required!
+            </p>
+        </ng-container>
     </form>
     <div class="action-buttons">
         <ng-container *ngIf="isDisabled">

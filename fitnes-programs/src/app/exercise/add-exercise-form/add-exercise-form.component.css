@@ -44,3 +44,15 @@ input {
     background-color: #ddd;
     color: black;
 }
+
+p.error {
+    color: red;
+}
+
+input.ng-valid {
+    border-left: 5px solid green;
+}
+
+input.ng-invalid.ng-touched {
+    border-left: 5px solid red
+}
