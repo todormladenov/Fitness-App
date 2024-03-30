@@ -8,4 +8,16 @@ import { Exercise } from '../types/exercise';
 })
 export class AddExerciseFormComponent {
   @Input('exercise') exercise = {} as Exercise;
+  @Input('deleteExercise') deleteExercise!: (index: number) => void;
+  @Input('index') index!: number;
+
+  isDisabled = true;
+
+  edit() {
+    this.isDisabled = false;
+  }
+
+  delete() {
+    this.deleteExercise(this.index);
+  }
 }

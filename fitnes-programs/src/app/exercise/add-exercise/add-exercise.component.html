@@ -1,6 +1,9 @@
 <button class="add-exercise-btn" (click)="addExercise()">Add Exercise</button>
 <div class="add-exercise-container">
-    <ng-container *ngFor="let exercise of exerciseList">
-        <app-add-exercise-form [exercise]="exercise" />
+    <ng-container *ngFor="let exercise of exerciseList; let i = index">
+        <app-add-exercise-form 
+        [exercise]="exercise"
+        [deleteExercise]="deleteExercise"
+        [index]="i" />
     </ng-container>
 </div>

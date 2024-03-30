@@ -2,21 +2,21 @@
     <form>
         <div>
             <label for="title">Exercise Title</label>
-            <input type="text" name="title" placeholder="Exercise Title">
+            <input type="text" name="title" placeholder="Exercise Title" [disabled]="isDisabled">
         </div>
         <div>
             <label for="sets">Exercise Sets</label>
-            <input type="number" name="sets" placeholder="Exercise Sets">
+            <input type="number" name="sets" placeholder="Exercise Sets" [disabled]="isDisabled">
         </div>
         <div>
             <label for="repetitions">Exercise Repetitions</label>
-            <input type="text" name="repetitions" placeholder="Exercise Repetitions">
+            <input type="text" name="repetitions" placeholder="Exercise Repetitions" [disabled]="isDisabled">
         </div>
     </form>
     <div class="action-buttons">
-        <button>Edit</button>
-        <button>Delete</button>
-        <button>Save</button>
-        <button>Cancel</button>
+        <button (click)="edit()" *ngIf="isDisabled">Edit</button>
+        <button (click)="delete()" *ngIf="isDisabled">Delete</button>
+        <button *ngIf="!isDisabled">Save</button>
+        <button *ngIf="!isDisabled">Cancel</button>
     </div>
 </div>

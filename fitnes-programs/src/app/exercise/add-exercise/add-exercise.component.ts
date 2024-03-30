@@ -6,11 +6,11 @@ import { Exercise } from '../types/exercise';
   templateUrl: './add-exercise.component.html',
   styleUrls: ['./add-exercise.component.css']
 })
-export class AddExerciseComponent implements OnInit{
-  exerciseList: Exercise [] = [];
+export class AddExerciseComponent implements OnInit {
+  exerciseList: Exercise[] = [];
 
   addExercise() {
-    this.exerciseList.push({
+    const newExercise: Exercise = {
       objectId: null,
       createdAt: '',
       updatedAt: '',
@@ -19,10 +19,16 @@ export class AddExerciseComponent implements OnInit{
       repetitions: '',
       program: null,
       owner: null
-    })
+    }
+
+    this.exerciseList = [...this.exerciseList, newExercise]
   }
 
   ngOnInit(): void {
     this.addExercise()
+  }
+
+  deleteExercise = (index: number) => {
+    this.exerciseList.splice(index, 1);
   }
 }
