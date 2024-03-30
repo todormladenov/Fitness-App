@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createPointer } from '../shared/utils/create-pointer';
 import { CreatedProgram, Program } from './types/program';
-import { ReadingApiResponse } from '../shared/types/response';
+import { ReadingProgramApiResponse } from '../shared/types/response';
 import { Subject, tap } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class ProgramService {
   constructor(private http: HttpClient) { }
 
   private fetchPrograms(limit: number, skip: number) {
-    return this.http.get<ReadingApiResponse>(`api/classes/Program?limit=${limit}&skip=${skip}`)
+    return this.http.get<ReadingProgramApiResponse>(`api/classes/Program?limit=${limit}&skip=${skip}`)
       .pipe(tap((data) => {
         this.programs$$.next(data.results);
       }))
@@ -26,7 +26,7 @@ export class ProgramService {
   }
 
   getNewestProgram() {
-    return this.http.get<ReadingApiResponse>('api/classes/Program?order=-createdAt&limit=1');
+    return this.http.get<ReadingProgramApiResponse>('api/classes/Program?order=-createdAt&limit=1');
   }
 
   getProgramById(programId: string) {
