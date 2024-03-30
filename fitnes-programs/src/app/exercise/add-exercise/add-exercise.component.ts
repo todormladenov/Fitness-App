@@ -17,11 +17,11 @@ export class AddExerciseComponent implements OnInit {
   addExercise() {
     const newExercise: Exercise = {
       objectId: null,
-      createdAt: '',
-      updatedAt: '',
-      title: '',
-      sets: '',
-      repetitions: '',
+      createdAt: null,
+      updatedAt: null,
+      title: null,
+      sets: null,
+      repetitions: null,
       program: null,
       owner: null
     }
@@ -33,13 +33,13 @@ export class AddExerciseComponent implements OnInit {
     this.activatedRoute.params.subscribe((data) => {
       this.programId = data['programId'];
       this.loadExercise();
-      this.addExercise();
     });
   }
-
+  
   loadExercise() {
     this.exerciseServices.getExerciseByProgramId(this.programId).subscribe((data) => {
       this.exerciseList = data.results;
+      this.addExercise();
     })
   }
 

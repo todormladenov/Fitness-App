@@ -1,49 +1,46 @@
 <div class="add-exercise">
-    <form #form="ngForm">
+    <form [formGroup]="form">
         <div>
             <label for="title">Exercise Title</label>
-            <input type="text" name="title" placeholder="Exercise Title" [disabled]="isDisabled" ngModel
-                #titleInput="ngModel" required>
+            <input type="text" name="title" placeholder="Exercise Title" formControlName="title">
         </div>
 
-        <ng-container *ngIf="titleInput.touched">
-            <p class="error" *ngIf="titleInput.errors?.['required']">
+        <ng-container *ngIf="form.get('title')?.touched">
+            <p class="error" *ngIf="form.get('title')?.errors?.['required']">
                 Title is required!
             </p>
         </ng-container>
 
         <div>
             <label for="sets">Exercise Sets</label>
-            <input type="number" name="sets" placeholder="Exercise Sets" [disabled]="isDisabled" ngModel
-                #setsInput="ngModel" required>
+            <input type="number" name="sets" placeholder="Exercise Sets" formControlName="sets">
         </div>
 
-        <ng-container *ngIf="setsInput.touched">
-            <p class="error" *ngIf="setsInput.errors?.['required']">
+        <ng-container *ngIf="form.get('sets')?.touched">
+            <p class="error" *ngIf="form.get('sets')?.errors?.['required']">
                 Sets is required!
             </p>
         </ng-container>
 
         <div>
             <label for="repetitions">Exercise Repetitions</label>
-            <input type="text" name="repetitions" placeholder="Exercise Repetitions" [disabled]="isDisabled" ngModel
-                #repetitionsInput="ngModel" required>
+            <input type="text" name="repetitions" placeholder="Exercise Repetitions" formControlName="repetitions">
         </div>
 
-        <ng-container *ngIf="repetitionsInput.touched">
-            <p class="error" *ngIf="repetitionsInput.errors?.['required']">
+        <ng-container *ngIf="form.get('repetitions')?.touched">
+            <p class="error" *ngIf="form.get('repetitions')?.errors?.['required']">
                 Repetitions is required!
             </p>
         </ng-container>
     </form>
     <div class="action-buttons">
-        <ng-container *ngIf="isDisabled">
+        <ng-container *ngIf="form.disabled">
             <button (click)="edit()">Edit</button>
             <button (click)="delete()">Delete</button>
         </ng-container>
 
-        <ng-container *ngIf="!isDisabled">
-            <button (click)="save(form)" [disabled]="form.invalid">Save</button>
+        <ng-container *ngIf="form.enabled">
+            <button (click)="save()" [disabled]="form.invalid">Save</button>
             <button (click)="cancel()">Cancel</button>
         </ng-container>
     </div>

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Exercise } from '../types/exercise';
 import { ExerciseService } from '../exercise.service';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -9,21 +9,39 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './add-exercise-form.component.html',
   styleUrls: ['./add-exercise-form.component.css']
 })
-export class AddExerciseFormComponent {
+export class AddExerciseFormComponent implements OnInit {
   @Input('exercise') exercise = {} as Exercise;
   @Input('deleteExercise') deleteExercise!: (index: number) => void;
   @Input('index') index!: number;
   @Input('programId') programId: string = '';
   userId: string = '';
 
-  isDisabled = true;
+  form = this.fb.group({
+    title: ['', Validators.required],
+    sets: [0, Validators.required],
+    repetitions: ['', Validators.required],
+  });
+
+
+  ngOnInit(): void {
+    const { title, sets, repetitions } = this.exercise;
+  
+    this.form.setValue({
+      title,
+      sets,
+      repetitions
+    });
+
+    this.form.disable();
+  }
 
   constructor(
     private exerciseService: ExerciseService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private fb: FormBuilder) { }
 
   edit() {
-    this.isDisabled = false;
+    this.form.enable();
   }
 
   delete() {
@@ -31,11 +49,11 @@ export class AddExerciseFormComponent {
   }
 
   cancel() {
-    this.isDisabled = true;
+    this.form.disable();
   }
 
-  save(form: NgForm) {
-    if (form.invalid) {
+  save() {
+    if (this.form.invalid) {
       return;
     }
 
@@ -43,11 +61,11 @@ export class AddExerciseFormComponent {
       this.userId = this.userService.userId;
     }
 
-    const { title, sets, repetitions } = form.value;
+    const { title, sets, repetitions } = this.form.value;
 
-    this.exerciseService.create(title, sets, repetitions, this.programId, this.userId).subscribe((res) => {
+    this.exerciseService.create(title!, sets!, repetitions!, this.programId, this.userId).subscribe((res) => {
       this.exercise.objectId = res.objectId;
-      this.isDisabled = true;
+      this.form.disable();
     });
   }
 }
