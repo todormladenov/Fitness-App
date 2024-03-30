@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AddExerciseComponent } from './add-exercise/add-exercise.component';
 import { ExerciseRoutingModule } from './exercise-routing.module';
 import { AddExerciseFormComponent } from './add-exercise-form/add-exercise-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { AddExerciseFormComponent } from './add-exercise-form/add-exercise-form.
   ],
   imports: [
     CommonModule,
-    ExerciseRoutingModule
+    ExerciseRoutingModule,
+    FormsModule
   ]
 })
 export class ExerciseModule { }

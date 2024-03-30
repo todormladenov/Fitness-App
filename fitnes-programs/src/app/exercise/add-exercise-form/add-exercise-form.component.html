@@ -1,22 +1,30 @@
 <div class="add-exercise">
-    <form>
+    <form #form="ngForm">
         <div>
             <label for="title">Exercise Title</label>
-            <input type="text" name="title" placeholder="Exercise Title" [disabled]="isDisabled">
+            <input type="text" name="title" placeholder="Exercise Title" [disabled]="isDisabled" ngModel
+                #titleInput="ngModel" required>
         </div>
         <div>
             <label for="sets">Exercise Sets</label>
-            <input type="number" name="sets" placeholder="Exercise Sets" [disabled]="isDisabled">
+            <input type="number" name="sets" placeholder="Exercise Sets" [disabled]="isDisabled" ngModel
+                #setsInput="ngModel" required>
         </div>
         <div>
             <label for="repetitions">Exercise Repetitions</label>
-            <input type="text" name="repetitions" placeholder="Exercise Repetitions" [disabled]="isDisabled">
+            <input type="text" name="repetitions" placeholder="Exercise Repetitions" [disabled]="isDisabled" ngModel
+                #repetitionsInput="ngModel" required>
         </div>
     </form>
     <div class="action-buttons">
-        <button (click)="edit()" *ngIf="isDisabled">Edit</button>
-        <button (click)="delete()" *ngIf="isDisabled">Delete</button>
-        <button *ngIf="!isDisabled">Save</button>
-        <button (click)="cancel()" *ngIf="!isDisabled">Cancel</button>
+        <ng-container *ngIf="isDisabled">
+            <button (click)="edit()">Edit</button>
+            <button (click)="delete()">Delete</button>
+        </ng-container>
+
+        <ng-container *ngIf="!isDisabled">
+            <button (click)="save(form)" [disabled]="form.invalid">Save</button>
+            <button (click)="cancel()">Cancel</button>
+        </ng-container>
     </div>
 </div>
