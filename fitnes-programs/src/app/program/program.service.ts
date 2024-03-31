@@ -29,7 +29,8 @@ export class ProgramService {
   }
 
   getNewestProgram() {
-    return this.http.get<ReadingProgramApiResponse>('api/classes/Program?order=-createdAt&limit=1');
+    return this.http.get<ReadingProgramApiResponse>('api/classes/Program?order=-createdAt&limit=1')
+    .pipe(tap(data => this.singleProgram$$.next(data.results[0])));
   }
 
   getProgramById(programId: string) {
