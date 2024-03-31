@@ -1,4 +1,5 @@
 <div class="add-exercise">
+        <app-loader *ngIf="isLoading | async" />
     <form [formGroup]="form">
         <div>
             <label for="title">Exercise Title</label>

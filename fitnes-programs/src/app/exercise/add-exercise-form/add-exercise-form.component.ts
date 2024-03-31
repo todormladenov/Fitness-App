@@ -3,6 +3,7 @@ import { Exercise } from '../types/exercise';
 import { ExerciseService } from '../exercise.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/user/user.service';
+import { LoaderService } from 'src/app/shared/loader/loader.service';
 
 @Component({
   selector: 'app-add-exercise-form',
@@ -38,7 +39,12 @@ export class AddExerciseFormComponent implements OnInit {
   constructor(
     private exerciseService: ExerciseService,
     private userService: UserService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private loaderService: LoaderService) { }
+
+  get isLoading() {
+    return this.loaderService.isLoading();
+  }
 
   edit() {
     this.form.enable();
@@ -48,14 +54,17 @@ export class AddExerciseFormComponent implements OnInit {
     if (!confirm('Are you sure you want to delete this exercise ?')) {
       return;
     }
-
+    
     if (this.exercise.objectId) {
-      this.exerciseService.delete(this.exercise.objectId).subscribe((res) => {
-        console.log(res);
-      });
-    }
+      this.loaderService.setLoadingState(true);
 
-    this.deleteExercise(this.index);
+      this.exerciseService.delete(this.exercise.objectId).subscribe((res) => {
+        this.loaderService.setLoadingState(false);
+        this.deleteExercise(this.index);
+      });
+    } else {
+      this.deleteExercise(this.index);
+    }
   }
 
   cancel() {
@@ -73,6 +82,8 @@ export class AddExerciseFormComponent implements OnInit {
       return;
     }
 
+    this.loaderService.setLoadingState(true);
+
     if (this.userService.userId) {
       this.userId = this.userService.userId;
     }
@@ -83,12 +94,14 @@ export class AddExerciseFormComponent implements OnInit {
       this.exerciseService.update(title!, sets!, repetitions!, this.exercise.objectId, this.programId, this.userId)
         .subscribe((res) => {
           this.form.disable();
+          this.loaderService.setLoadingState(false);
         });
     } else {
       this.exerciseService.create(title!, sets!, repetitions!, this.programId, this.userId)
         .subscribe((res) => {
           this.exercise.objectId = res.objectId;
           this.form.disable();
+          this.loaderService.setLoadingState(false);
         });
     }
   }
