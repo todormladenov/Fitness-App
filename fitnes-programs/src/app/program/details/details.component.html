@@ -1,17 +1,17 @@
 <div class="details-container" *ngIf="!isLoading">
     <div class="details">
-        <img src="{{program.image}}" alt="IMG">
-        <h2>Name: {{program.title}}</h2>
-        <p>Type: {{program.type}}</p>
-        <p class="program-description">Description: {{program.description}}</p>
-        <p>Price: {{program.price}}$</p>
+        <img src="{{program?.image}}" alt="IMG">
+        <h2>Name: {{program?.title}}</h2>
+        <p>Type: {{program?.type}}</p>
+        <p class="program-description">Description: {{program?.description}}</p>
+        <p>Price: {{program?.price}}$</p>
         <div class="exercise-list" *ngIf="isShown">
             <ul>
-                <li>
+                <li *ngFor="let exercise of exerciseList">
                     <p>
-                        <span>Squat</span>
-                        <span>Sets: 3</span>
-                        <span>Repetitions: 8-10</span>
+                        <span>{{exercise.title}} </span>
+                        <span>Sets: {{exercise.sets}} </span>
+                        <span> Repetitions: {{exercise.repetitions}}</span>
                     </p>
                 </li>
             </ul>
@@ -20,8 +20,8 @@
             {{ isShown ? 'Hide Exercises' : 'Show Exercises' }}
         </button>
         <div class="program-actions" *ngIf="isLoggedIn">
-            <a [routerLink]="['/programs', program.objectId, 'edit']" *ngIf="isOwner">Edit</a>
-            <a [routerLink]="[ '/programs', program.objectId,'add-exercise']" *ngIf="isOwner">Add Exercises</a>
+            <a [routerLink]="['/programs', program?.objectId, 'edit']" *ngIf="isOwner">Edit</a>
+            <a [routerLink]="[ '/programs', program?.objectId,'add-exercise']" *ngIf="isOwner">Add Exercises</a>
             <a (click)="delete()" *ngIf="isOwner">Delete</a>
             <a *ngIf="!isOwner">Subscribe</a>
         </div>

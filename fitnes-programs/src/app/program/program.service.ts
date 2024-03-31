@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { createPointer } from '../shared/utils/create-pointer';
 import { CreatedProgram, Program } from './types/program';
 import { ReadingProgramApiResponse } from '../shared/types/response';
-import { Subject, tap } from 'rxjs';
+import { BehaviorSubject, Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,9 @@ import { Subject, tap } from 'rxjs';
 export class ProgramService {
   private programs$$ = new Subject<Program[]>();
   programs$ = this.programs$$.asObservable();
+
+  private singleProgram$$ = new BehaviorSubject<Program | undefined>(undefined);
+  singleProgram$ = this.singleProgram$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +33,8 @@ export class ProgramService {
   }
 
   getProgramById(programId: string) {
-    return this.http.get<Program>(`api/classes/Program/${programId}`);
+    return this.http.get<Program>(`api/classes/Program/${programId}`)
+      .pipe(tap(data => this.singleProgram$$.next(data)));
   }
 
   createProgram(title: string, description: string, type: string, image: string, price: string, ownerId: string) {
