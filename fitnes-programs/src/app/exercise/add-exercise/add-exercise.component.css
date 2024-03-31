@@ -5,7 +5,8 @@
     justify-content: space-between;
 }
 
-.add-exercise-btn {
+.add-exercise-btn,
+.program-details-link {
     margin-bottom: 20px;
     background-color: red;
     color: white;
@@ -14,8 +15,14 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none;
 }
 
-.add-exercise-btn:hover {
+.add-exercise-btn:hover,
+.program-details-link:hover {
     background-color: black;
+}
+
+.program-details-link {
+    margin-left: 20px;
 }

@@ -31,14 +31,15 @@
 }
 
 .program-actions a {
-    width: 100px;
-    height: 30px;
+    width: 25%;
+    height: 100%;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     background-color: black;
     color: white;
     text-align: center;
+    text-decoration: none;
 }
 
 .program-actions a:hover {
