@@ -5,7 +5,7 @@ import { AddExerciseComponent } from './add-exercise/add-exercise.component';
 
 const routes: Routes = [
 
-    { path: ':programId/add-exercise', component: AddExerciseComponent, canActivate: [OwnerActivate] }
+    { path: 'programs/:programId/add-exercise', component: AddExerciseComponent, canActivate: [OwnerActivate] }
 ];
 
 @NgModule({

@@ -31,9 +31,10 @@ export class CreateProgramComponent {
 
     this.loaderService.setLoadingState(true);
 
-    this.programService.createProgram(title, description, type, image, price, ownerId!).subscribe(() => {
+    this.programService.createProgram(title, description, type, image, price, ownerId!).subscribe((res) => {
       this.loaderService.setLoadingState(false);
-      this.router.navigate(['/home']);
+      const programId = res.objectId;
+      this.router.navigate([`/programs/${programId}/add-exercise`]);
     });
   }
 }

@@ -1,4 +1,7 @@
-<button class="add-exercise-btn" (click)="addExercise()">Add Exercise</button>
+<div>
+    <button class="add-exercise-btn" (click)="addExercise()">Add Exercise</button>
+    <a class="program-details-link" [routerLink]="['/programs', programId]">Program Details</a>
+</div>
 <div class="add-exercise-container">
     <ng-container *ngFor="let exercise of exerciseList; let i = index">
         <app-add-exercise-form 
