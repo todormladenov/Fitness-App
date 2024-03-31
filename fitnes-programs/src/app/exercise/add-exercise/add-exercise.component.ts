@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Exercise } from '../types/exercise';
 import { ActivatedRoute } from '@angular/router';
 import { ExerciseService } from '../exercise.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-exercise',
   templateUrl: './add-exercise.component.html',
   styleUrls: ['./add-exercise.component.css']
 })
-export class AddExerciseComponent implements OnInit {
+export class AddExerciseComponent implements OnInit, OnDestroy {
+  exerciseSubscription: Subscription | undefined;
   exerciseList: Exercise[] = [];
   programId: string = '';
 
@@ -35,15 +37,20 @@ export class AddExerciseComponent implements OnInit {
       this.loadExercise();
     });
   }
-  
+
   loadExercise() {
-    this.exerciseServices.getExerciseByProgramId(this.programId).subscribe((data) => {
-      this.exerciseList = data.results;
+    this.exerciseSubscription = this.exerciseServices.exercise$.subscribe((exercises) => {
+      this.exerciseList = exercises;
       this.addExercise();
     })
+    this.exerciseServices.getExerciseByProgramId(this.programId).subscribe();
   }
 
   deleteExercise = (index: number) => {
     this.exerciseList.splice(index, 1);
+  }
+
+  ngOnDestroy(): void {
+    this.exerciseSubscription?.unsubscribe();
   }
 }

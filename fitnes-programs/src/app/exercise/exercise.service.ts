@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createPointer } from '../shared/utils/create-pointer';
-import { CreatedExercise } from './types/exercise';
+import { CreatedExercise, Exercise } from './types/exercise';
 import { ReadingExerciseApiResponse } from '../shared/types/response';
+import { Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
+  private exercise$$ = new Subject<Exercise[]>();
+  exercise$ = this.exercise$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +20,8 @@ export class ExerciseService {
     }
 
     const query = encodeURIComponent(JSON.stringify(pointer));
-    return this.http.get<ReadingExerciseApiResponse>(`api/Classes/Exercise?where=${query}`);
+    return this.http.get<ReadingExerciseApiResponse>(`api/Classes/Exercise?where=${query}`)
+      .pipe(tap(data => this.exercise$$.next(data.results)));
   }
 
   create(title: string, sets: number, repetitions: string, programId: string, ownerId: string) {
