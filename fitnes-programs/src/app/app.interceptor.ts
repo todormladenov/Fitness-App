@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor
 import { Injectable, Provider } from "@angular/core";
 import { Observable, catchError } from "rxjs";
 import { environment } from "src/environments/environment.development";
-import { getItem } from "./user/utils/storage-management";
+import { getItem, removeItem } from "./user/utils/storage-management";
 import { Router } from "@angular/router";
 import { ErrorService } from "./core/error/error.service";
 
@@ -36,7 +36,8 @@ export class AppInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((err) => {
                 if (err.error.code === 209) {
-                    return this.router.navigate(['/user/login'])
+                    removeItem('AuthToken');
+                    return this.router.navigate(['/user/login']);
                 }
                 this.errorService.setError(err?.error);
 
