@@ -19,10 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadMostRecentProgram();
   }
 
-  get isLoading(){
-    return this.globalLoaderService.isLoading();
-  }
-
   loadMostRecentProgram(){
     this.globalLoaderService.setLoadingState(true);
 
