@@ -21,7 +21,7 @@
         </button>
         <div class="program-actions" *ngIf="isLoggedIn">
             <a [routerLink]="['/programs', program?.objectId, 'edit']" *ngIf="isOwner">Edit</a>
-            <a [routerLink]="[ '/programs', program?.objectId,'add-exercise']" *ngIf="isOwner">Add Exercises</a>
+            <a [routerLink]="[ '/exercise', 'add-exercise', 'programs', program?.objectId]" *ngIf="isOwner">Add Exercises</a>
             <a (click)="delete()" *ngIf="isOwner">Delete</a>
             <a *ngIf="!isOwner">Subscribe</a>
         </div>

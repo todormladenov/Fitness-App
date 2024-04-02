@@ -6,10 +6,10 @@ import { GuestActivate } from '../guards/guest.activate';
 
 const routes: Routes = [
     {
-        path: 'user/login', component: LoginComponent , canActivate: [GuestActivate]
+        path: 'login', component: LoginComponent , canActivate: [GuestActivate]
     },
     {
-        path: 'user/register', component: RegisterComponent, canActivate: [GuestActivate]
+        path: 'register', component: RegisterComponent, canActivate: [GuestActivate]
     }
 ];
 
