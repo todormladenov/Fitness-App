@@ -10,6 +10,6 @@ export class GlobalLoaderComponent {
   constructor(private globalLoaderService: GlobalLoaderService) { }
 
   get isLoading(){
-    return this.globalLoaderService.isLoading
+    return this.globalLoaderService.isLoading();
   }
 }
