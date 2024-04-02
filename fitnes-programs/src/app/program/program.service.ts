@@ -30,7 +30,7 @@ export class ProgramService {
 
   getNewestProgram() {
     return this.http.get<ReadingProgramApiResponse>('api/classes/Program?order=-createdAt&limit=1')
-    .pipe(tap(data => this.singleProgram$$.next(data.results[0])));
+      .pipe(tap(data => this.singleProgram$$.next(data.results[0])));
   }
 
   getProgramById(programId: string) {
@@ -38,7 +38,7 @@ export class ProgramService {
       .pipe(tap(data => this.singleProgram$$.next(data)));
   }
 
-  clearSingleProgram(){
+  clearSingleProgram() {
     this.singleProgram$$.next(undefined);
   }
 
@@ -70,5 +70,9 @@ export class ProgramService {
     };
 
     return this.http.put<{}>(`api/classes/Program/${programId}`, programData);
+  }
+
+  subscribeToProgram(programId: string, subscribers: string[]) {
+    return this.http.put<{}>(`api/classes/Program/${programId}`, { subscribers });
   }
 }

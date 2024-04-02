@@ -14,5 +14,6 @@ export interface Program {
     type: string,
     image: string,
     price: string,
-    owner: Pointer
+    owner: Pointer,
+    subscribers: string[] | undefined
 }

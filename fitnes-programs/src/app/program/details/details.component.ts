@@ -23,6 +23,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   programId: string | null = '';
   isShown = false;
   isOwner = false;
+  isSubscribed: boolean | undefined;
 
   constructor(
     private programService: ProgramService,
@@ -50,12 +51,35 @@ export class DetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  subscribe() {
+    const subscriberId = this.userService.userId;
+
+    if (!subscriberId) {
+      return this.router.navigate(['/user/login']);
+    }
+
+    if (!this.program) {
+      return this.router.navigate(['/programs']);
+    }
+
+    if (!this.program.subscribers) {
+      this.program.subscribers = [];
+    }
+
+    const subscribers = [...this.program.subscribers, subscriberId];
+
+    return this.programService.subscribeToProgram(this.program.objectId, subscribers).subscribe(() => {
+      this.isSubscribed = true;
+    })
+  }
+
   private getProgram() {
     this.programService.getProgramById(this.programId!).subscribe();
 
     this.programSubscription = this.programService.singleProgram$.subscribe((data) => {
       this.program = data;
       this.isOwner = this.userService.userId === data?.owner.objectId;
+      this.isSubscribed = this.program?.subscribers?.some((subscriberId) => subscriberId === this.userService.userId);
     });
   }
 
@@ -70,10 +94,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   get isLoggedIn() {
     return this.userService.isLoggedIn;
-  }
-
-  get isLoading() {
-    return this.globalLoaderService.isLoading();
   }
 
   toggleList() {
