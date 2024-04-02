@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isLoading">
+<ng-container *ngIf="!(isLoading | async)">
     <div class="welcome">
         <h1>Welcome to FitFocus!</h1>
         <p>Get ready to sweat, achieve, and exceed your fitness goals with our tailored

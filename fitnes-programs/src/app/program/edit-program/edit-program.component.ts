@@ -58,11 +58,11 @@ export class EditProgramComponent implements OnInit {
   }
 
   get globalLoaderIsLoading() {
-    return this.globalLoaderService.isLoading;
+    return this.globalLoaderService.isLoading();
   }
 
   getProgram() {
-    this.globalLoaderService.showLoader();
+    this.globalLoaderService.setLoadingState(true);
     this.activeRoute.params.subscribe((data) => {
       this.programId = data['programId'];
 
@@ -78,7 +78,7 @@ export class EditProgramComponent implements OnInit {
           description
         });
 
-        this.globalLoaderService.hideLoader();
+        this.globalLoaderService.setLoadingState(false);
       });
     })
   }

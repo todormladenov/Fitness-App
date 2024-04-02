@@ -1,4 +1,4 @@
-<div class="edit-workout" *ngIf="!globalLoaderIsLoading">
+<div class="edit-workout" *ngIf="!(globalLoaderIsLoading | async)">
     <h3>Edit Workout Form</h3>
     <form class="form" [formGroup]="form" (ngSubmit)="edit()">
         <app-loader *ngIf="isLoading | async" />
@@ -78,6 +78,6 @@
             </p>
         </ng-container>
 
-        <input type="submit" value="Create" [disabled]="form.invalid">
+        <input type="submit" value="Edit" [disabled]="form.invalid">
     </form>
 </div>

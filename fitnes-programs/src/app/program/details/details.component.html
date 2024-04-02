@@ -1,4 +1,4 @@
-<div class="details-container" *ngIf="!isLoading">
+<div class="details-container" *ngIf="!(isLoading | async)">
     <div class="details">
         <img src="{{program?.image}}" alt="IMG">
         <h2>Name: {{program?.title}}</h2>

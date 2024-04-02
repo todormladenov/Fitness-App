@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   program: Program | undefined;
   exerciseList: Exercise[] = [];
 
-  programId: string = '';
+  programId: string | null = '';
   isShown = false;
   isOwner = false;
 
@@ -37,39 +37,35 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   loadProgramWithExercise() {
-    this.globalLoaderService.showLoader();
+    this.globalLoaderService.setLoadingState(true);
+    this.programId = this.activeRoute.snapshot.paramMap.get('programId');
 
-    this.activeRoute.params.subscribe((data) => {
-      this.programId = data['programId'];
-
-      this.getProgram();
-      this.getExercise();
-
-      this.globalLoaderService.hideLoader();
-    })
+    this.getProgram();
+    this.getExercise();
   }
 
   delete() {
-    this.programService.deleteProgram(this.programId).subscribe((res) => {
+    this.programService.deleteProgram(this.programId!).subscribe((res) => {
       this.router.navigate(['/programs']);
     });
   }
 
   private getProgram() {
+    this.programService.getProgramById(this.programId!).subscribe();
+
     this.programSubscription = this.programService.singleProgram$.subscribe((data) => {
       this.program = data;
       this.isOwner = this.userService.userId === data?.owner.objectId;
     });
-
-    this.programService.getProgramById(this.programId).subscribe();
   }
 
   private getExercise() {
-    this.exerciseSubscription = this.exerciseService.exercise$.subscribe((exercise) => {
-      this.exerciseList = exercise
-    });
+    this.exerciseService.getExerciseByProgramId(this.programId!).subscribe();
 
-    this.exerciseService.getExerciseByProgramId(this.programId).subscribe()
+    this.exerciseSubscription = this.exerciseService.exercise$.subscribe((exercise) => {
+      this.exerciseList = exercise;
+      this.globalLoaderService.setLoadingState(false);
+    });
   }
 
   get isLoggedIn() {
@@ -77,7 +73,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   get isLoading() {
-    return this.globalLoaderService.isLoading;
+    return this.globalLoaderService.isLoading();
   }
 
   toggleList() {
@@ -85,6 +81,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.programService.clearSingleProgram();
     this.exerciseSubscription?.unsubscribe();
     this.programSubscription?.unsubscribe();
   }

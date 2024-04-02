@@ -3,6 +3,7 @@ import { Exercise } from '../types/exercise';
 import { ActivatedRoute } from '@angular/router';
 import { ExerciseService } from '../exercise.service';
 import { Subscription } from 'rxjs';
+import { GlobalLoaderService } from 'src/app/core/global-loader/global-loader.service';
 
 @Component({
   selector: 'app-add-exercise',
@@ -14,7 +15,10 @@ export class AddExerciseComponent implements OnInit, OnDestroy {
   exerciseList: Exercise[] = [];
   programId: string = '';
 
-  constructor(private exerciseServices: ExerciseService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private exerciseServices: ExerciseService,
+    private activatedRoute: ActivatedRoute,
+    private globalLoaderService: GlobalLoaderService) { }
 
   addExercise() {
     const newExercise: Exercise = {
@@ -31,6 +35,10 @@ export class AddExerciseComponent implements OnInit, OnDestroy {
     this.exerciseList = [...this.exerciseList, newExercise]
   }
 
+  get isLoading(){
+    return this.globalLoaderService.isLoading();
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data) => {
       this.programId = data['programId'];
@@ -39,9 +47,13 @@ export class AddExerciseComponent implements OnInit, OnDestroy {
   }
 
   loadExercise() {
+    this.globalLoaderService.setLoadingState(true);
+
     this.exerciseSubscription = this.exerciseServices.exercise$.subscribe((exercises) => {
       this.exerciseList = exercises;
       this.addExercise();
+
+      this.globalLoaderService.setLoadingState(false);
     })
     this.exerciseServices.getExerciseByProgramId(this.programId).subscribe();
   }

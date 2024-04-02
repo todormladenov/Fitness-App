@@ -38,6 +38,10 @@ export class ProgramService {
       .pipe(tap(data => this.singleProgram$$.next(data)));
   }
 
+  clearSingleProgram(){
+    this.singleProgram$$.next(undefined);
+  }
+
   createProgram(title: string, description: string, type: string, image: string, price: string, ownerId: string) {
     const programData = {
       title,
