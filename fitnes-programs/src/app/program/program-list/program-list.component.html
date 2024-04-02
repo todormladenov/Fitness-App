@@ -1,5 +1,6 @@
-<div class="catalog" infinite-scroll
-[infiniteScrollDistance]="2"
-(scrolled)="scrolled()">
+<div class="catalog" infinite-scroll 
+    [infiniteScrollDistance]="2" 
+    [infiniteScrollThrottle]="1000"
+    (scrolled)="scrolled()">
     <app-program *ngFor="let program of programs" [program]="program" />
 </div>

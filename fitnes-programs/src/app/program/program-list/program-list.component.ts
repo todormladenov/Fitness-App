@@ -9,11 +9,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './program-list.component.html',
   styleUrls: ['./program-list.component.css']
 })
-export class ProgramListComponent implements OnInit, OnDestroy{
+export class ProgramListComponent implements OnInit, OnDestroy {
   programSubscription: Subscription;
   programs: Program[] = [];
   limit = 1;
   skip = 0;
+  isFinished = false;
 
   constructor(private programService: ProgramService, private globalLoaderService: GlobalLoaderService) {
     this.programSubscription = programService.programs$.subscribe(data => this.programs = [...this.programs, ...data]);
@@ -24,7 +25,7 @@ export class ProgramListComponent implements OnInit, OnDestroy{
   }
 
   scrolled() {
-    if (this.globalLoaderService.isLoading) {
+    if (this.isFinished) {
       return
     }
 
@@ -32,10 +33,15 @@ export class ProgramListComponent implements OnInit, OnDestroy{
   }
 
   getPrograms() {
-    this.globalLoaderService.showLoader();
+    this.globalLoaderService.setLoadingState(true);
     this.programService.getPrograms(this.limit, this.skip).subscribe((res) => {
       this.skip++;
-      this.globalLoaderService.hideLoader();
+
+      if (res.results.length == 0) {
+        this.isFinished = true;
+      }
+
+      this.globalLoaderService.setLoadingState(false);
     })
   }
 
