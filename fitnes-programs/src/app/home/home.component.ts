@@ -19,18 +19,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadMostRecentProgram();
   }
 
-  loadMostRecentProgram(){
+  loadMostRecentProgram() {
     this.globalLoaderService.setLoadingState(true);
-
     this.getMostRecentProgram();
   }
 
   private getMostRecentProgram() {
-    this.programService.getNewestProgram().subscribe();
+    this.programService.getNewestProgram()
+      .subscribe(() => this.globalLoaderService.setLoadingState(false));
 
     this.programSubscription = this.programService.singleProgram$.subscribe((data) => {
       this.program = data;
-      this.globalLoaderService.setLoadingState(false);
     });
   }
 

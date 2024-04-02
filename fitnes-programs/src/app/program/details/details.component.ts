@@ -84,11 +84,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   private getExercise() {
-    this.exerciseService.getExerciseByProgramId(this.programId!).subscribe();
+    this.exerciseService.getExerciseByProgramId(this.programId!)
+      .subscribe(() => this.globalLoaderService.setLoadingState(false));
 
     this.exerciseSubscription = this.exerciseService.exercise$.subscribe((exercise) => {
       this.exerciseList = exercise;
-      this.globalLoaderService.setLoadingState(false);
     });
   }
 
