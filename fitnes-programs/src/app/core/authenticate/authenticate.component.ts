@@ -10,27 +10,27 @@ import { GlobalLoaderService } from '../global-loader/global-loader.service';
 export class AuthenticateComponent implements OnInit {
   isAuthenticating = true
 
-  constructor(private userService: UserService, private globalLoaderServices: GlobalLoaderService) {
-    globalLoaderServices.isLoading = true;
-  }
+  constructor(private userService: UserService, private globalLoaderServices: GlobalLoaderService) { }
 
   ngOnInit(): void {
     this.authenticating();
   }
-
+  
   authenticating() {
+    this.globalLoaderServices.setLoadingState(true);
+
     this.userService.getCurrentUser().subscribe({
       next: () => {
         this.isAuthenticating = false;
-        this.globalLoaderServices.isLoading = false;
+        this.globalLoaderServices.setLoadingState(false);
       },
       error: () => {
         this.isAuthenticating = false;
-        this.globalLoaderServices.isLoading = false;
+        this.globalLoaderServices.setLoadingState(false);
       },
       complete: () => {
         this.isAuthenticating = false;
-        this.globalLoaderServices.isLoading = false;
+        this.globalLoaderServices.setLoadingState(false);
       },
     })
   }
