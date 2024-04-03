@@ -4,9 +4,9 @@ This is a system for creating, managing and subscribing for fitness programs.
 
 ## Functionality 
 * Registering users.
-* Creating and editing programs for registered users.
+* Creating and editing programs and exercises for registered users.
 * Possibility to subscribe for programs.
-* Interactive editor for programs and exercise.
+* Interactive editor for programs and exercises.
 * Interactive UI.
 
 ## Technologies 
@@ -19,7 +19,7 @@ This is a system for creating, managing and subscribing for fitness programs.
 * Register up page.
 * Programs catalog - page of created programs.
 * Program Details - More information for the program, exercise that includes, and the option to subscribe.
-* Profile Page - Information for created programs and subscribed programs.
+* Create program - Create view for program.
 * Program Editor - Edit view for program.
 * Exercise Editor - Edit view for the exercise of certain program. 
 
@@ -42,7 +42,8 @@ This is a system for creating, managing and subscribing for fitness programs.
     type: String,
     image: String,
     price: Number,
-    owner: Pointer
+    owner: Pointer,
+    subscribers: Array
 }
 ```
 * Exercise
@@ -58,6 +59,6 @@ This is a system for creating, managing and subscribing for fitness programs.
 
 ## Accessibility Control
 * Guest users can register, browse programs and inspec program details.
-* Registered users can create programs
+* Registered users can create programs add exercises and edit them.
 * Registered users that are not owners can subscribe for programs.
 * Only the creator of a program can edit and delete it.
