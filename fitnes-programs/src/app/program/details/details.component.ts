@@ -66,10 +66,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.program.subscribers = [];
     }
 
-    const subscribers = [...this.program.subscribers, subscriberId];
+    if (this.program.subscribers.includes(subscriberId)) {
+      return;
+    }
+
+    let subscribers = [...this.program.subscribers, subscriberId];
 
     return this.programService.subscribeToProgram(this.program.objectId, subscribers).subscribe(() => {
       this.isSubscribed = true;
+      this.program!.subscribers = subscribers;
     })
   }
 
@@ -88,7 +93,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       .subscribe(() => this.globalLoaderService.setLoadingState(false));
 
     this.exerciseSubscription = this.exerciseService.exercise$.subscribe((exercise) => {
-      this.exerciseList = exercise;
+      this.exerciseList = exercise;      
     });
   }
 

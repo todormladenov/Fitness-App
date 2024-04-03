@@ -39,11 +39,6 @@ export class AppInterceptor implements HttpInterceptor {
                     removeItem('AuthToken');
                     return this.router.navigate(['/user/login']);
                 }
-                
-                if (err.status === 404) {
-                    this.router.navigate(['/home']);
-                }
-                
                 this.errorService.setError(err?.error);
 
                 return [err]

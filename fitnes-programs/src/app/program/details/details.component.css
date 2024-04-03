@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .details {
@@ -59,4 +60,12 @@
 .show-exercise:hover {
     background-color: wheat;
     color: black;
+}
+
+p.subscribers {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 5px 10px;
 }

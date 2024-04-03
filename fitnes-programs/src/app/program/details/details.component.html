@@ -5,26 +5,36 @@
         <p>Type: {{program.type}}</p>
         <p class="program-description">Description: {{program.description}}</p>
         <p>Price: {{program.price}}$</p>
-        <div class="exercise-list" *ngIf="isShown">
-            <ul>
-                <li *ngFor="let exercise of exerciseList">
-                    <p>
-                        <span>{{exercise.title}} </span>
-                        <span>Sets: {{exercise.sets}} </span>
-                        <span> Repetitions: {{exercise.repetitions}}</span>
-                    </p>
-                </li>
-            </ul>
-        </div>
-        <button class="show-exercise" (click)="toggleList()">
-            {{ isShown ? 'Hide Exercises' : 'Show Exercises' }}
-        </button>
+        <!-- exercise list -->
+        <ng-container *ngIf="exerciseList.length">
+            <div class="exercise-list" *ngIf="isShown">
+                <ul>
+                    <li *ngFor="let exercise of exerciseList">
+                        <p>
+                            <span>{{exercise.title}} </span>
+                            <span>Sets: {{exercise.sets}} </span>
+                            <span> Repetitions: {{exercise.repetitions}}</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <button class="show-exercise" (click)="toggleList()">
+                {{ isShown ? 'Hide Exercises' : 'Show Exercises' }}
+            </button>
+        </ng-container>
+
+        <ng-container *ngIf="!exerciseList.length">
+            <p>No Exercises added yet.</p>
+        </ng-container>
+        <!-- action buttons -->
         <div class="program-actions" *ngIf="isLoggedIn">
             <a [routerLink]="['/programs', program.objectId, 'edit']" *ngIf="isOwner">Edit</a>
-            <a [routerLink]="[ '/exercise', 'add-exercise', 'programs', program.objectId]" *ngIf="isOwner">Add Exercises</a>
+            <a [routerLink]="[ '/exercise', 'add-exercise', 'programs', program.objectId]" *ngIf="isOwner">Add
+                Exercises</a>
             <a (click)="delete()" *ngIf="isOwner">Delete</a>
             <ng-container *ngIf="!isOwner">
                 <a *ngIf="!isSubscribed" (click)="subscribe()">Subscribe</a>
+                <p class="subscribers" *ngIf="program.subscribers?.length">Subscribers: {{program.subscribers?.length}}</p>
             </ng-container>
         </div>
     </div>
