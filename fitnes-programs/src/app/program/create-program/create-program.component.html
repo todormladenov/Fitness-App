@@ -22,7 +22,8 @@
         <!-- Type -->
         <div class="form-group">
             <label for="type">Type</label>
-            <select name="type" id="type" ngModel #typeInput="ngModel" required>
+            <select name="type" id="type" ngModel #typeInput="ngModel" required
+                [appTypes]="['Cardio', 'Crossfit', 'Strength', 'Hypertrophy']">
                 <option value="Cardio">Cardio</option>
                 <option value="Crossfit">Crossfit</option>
                 <option value="Strength">Strength</option>
@@ -33,6 +34,9 @@
         <ng-container *ngIf="typeInput.touched">
             <p class="error" *ngIf="typeInput.errors?.['required']">
                 Title is required!
+            </p>
+            <p class="error" *ngIf="typeInput.errors?.['typesValidator']">
+                Invalid type!
             </p>
         </ng-container>
 

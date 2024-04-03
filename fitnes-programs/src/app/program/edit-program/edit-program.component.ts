@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Program } from '../types/program';
 import { ProgramService } from '../program.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalLoaderService } from 'src/app/core/global-loader/global-loader.service';
 import { LoaderService } from 'src/app/shared/loader/loader.service';
+import { typesValidator } from '../utils/types-validator';
 
 @Component({
   selector: 'app-edit-program',
@@ -18,7 +19,7 @@ export class EditProgramComponent implements OnInit {
 
   form = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(25)]],
-    type: ['', [Validators.required]],
+    type: ['', [Validators.required, typesValidator(['Cardio', 'Crossfit', 'Strength', 'Hypertrophy'])]],
     image: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(0)]],
     description: ['', [Validators.required, Validators.minLength(20)]],

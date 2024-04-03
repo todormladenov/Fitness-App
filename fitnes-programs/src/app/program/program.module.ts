@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProgramComponent } from './program/program.component';
 import { EditProgramComponent } from './edit-program/edit-program.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TypesDirective } from './directives/types.directive';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ProgramListComponent,
     DetailsComponent,
     ProgramComponent,
-    EditProgramComponent
+    EditProgramComponent,
+    TypesDirective
   ],
   imports: [
     CommonModule,
